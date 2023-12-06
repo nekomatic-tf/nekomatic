@@ -1,10 +1,12 @@
-# TF2Autobot
+# TF2Autobot (Neko Fork) 🐈
 
-<div align="center"><a href="https://autobot.tf/"><img src="https://user-images.githubusercontent.com/47635037/100915844-e05e7380-350f-11eb-96f1-6d61141c4a44.png" alt="TF2Autobot" style="display: block; margin-left: auto; margin-right: auto;"></a></div>
+<div align="center"><a href="https://autobot.tf/"><img src="https://raw.githubusercontent.com/joe20050108/tf2autobot-neko-resources/main/logo.png" alt="TF2Autobot" style="display: block; margin-left: auto; margin-right: auto;"></a></div>
 
 
 A free and open source fully automated TF2 trading bot advertising on [backpack.tf](https://backpack.tf) using prices from [prices.tf](https://prices.tf).
-**TF2Autobot** is an improved and feature rich version of the original **tf2-automatic** made by [Nicklason](https://github.com/Nicklason). You can find out more about the original repository [here](https://github.com/Nicklason/tf2-automatic).
+**TF2Autobot** is an improved and feature rich version of the original **tf2-automatic** made by [Nicklason](https://github.com/Nicklason). You can find out more about the original repository [here](https://github.com/Nicklason/tf2-automatic). 
+
+Note: This fork was originally meant for my best friend Neko, but it seems he has decided to throw me out, so I guess I will continue this fork alone without him. 
 
 ![GitHub package version](https://img.shields.io/github/package-json/v/idinium96/tf2autobot.svg)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/TF2Autobot/tf2autobot/ci.yml?branch=development)](https://github.com/idinium96/tf2autobot/actions)
