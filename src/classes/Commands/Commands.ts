@@ -291,6 +291,8 @@ export default class Commands {
                 this.manager.refreshSchema(steamID);
             } else if (command === 'crafttoken' && isAdmin) {
                 this.crafting.craftTokenCommand(steamID, message);
+            } else if (command === 'pm2' && isAdmin) {
+                this.manager.processManagerCommand(steamID, message);
             } else {
                 const custom = this.bot.options.customMessage.commandNotFound;
 

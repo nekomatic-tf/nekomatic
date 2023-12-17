@@ -157,3 +157,30 @@ export function uptime(): string {
         return `Bot has been up for ${uptimeAsMoment.from(currentTime, true)}.`;
     }
 }
+
+export function timeSince(date) {
+    const seconds = Math.floor((new Date().valueOf() - date) / 1000);
+
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval.toString() + 'Y';
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval.toString() + 'M';
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval.toString() + 'D';
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval.toString() + 'h';
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval.toString() + 'm';
+    }
+    return Math.floor(seconds).toString() + 's';
+}

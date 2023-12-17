@@ -18,6 +18,8 @@ import log from '../../../lib/logger';
 import { pure, testPriceKey } from '../../../lib/tools/export';
 import filterAxiosError from '@tf2autobot/filter-axios-error';
 import { AxiosError } from 'axios';
+import pm2 from 'pm2';
+import { timeSince } from '../../../lib/tools/export';
 
 // Bot manager commands
 
@@ -986,5 +988,97 @@ export default class ManagerCommands {
                 }
             })
             .catch(err => this.bot.sendMessage(steamID, `❌ Failed to check for updates: ${JSON.stringify(err)}`));
+    }
+
+    processManagerCommand(steamID: SteamID, message: string): void {
+        const params = CommandParser.parseParams(CommandParser.removeCommand(removeLinkProtocol(message)));
+        if (process.env.pm_id === undefined) {
+            return this.bot.sendMessage(
+                steamID,
+                `❌ You are not running the bot with PM2! The PM2 command is not available.`
+            );
+        }
+        if (typeof params.start === 'string') {
+            const process = params.start;
+            this.bot.sendMessage(steamID, `⚠️ Telling PM2 to start process '${process}'.`);
+            pm2.start(process, err => {
+                if (err) {
+                    log.error(`PM2 failed to start process '${process}':`, err);
+                } else {
+                    log.info(`PM2 started process '${process}'`);
+                }
+                this.bot.sendMessage(
+                    steamID,
+                    err
+                        ? `❌ PM2 has failed to start process '${process}'.\`\`\`${err.toString()}\`\`\``
+                        : `✅ PM2 has started process '${process}'.`
+                );
+            });
+            return;
+        }
+        if (typeof params.restart === 'string') {
+            const process = params.restart;
+            this.bot.sendMessage(steamID, `⚠️ Telling PM2 to restart process '${process}'.`);
+            pm2.restart(process, err => {
+                if (err) {
+                    log.error(`PM2 failed to restart process '${process}':`, err);
+                } else {
+                    log.info(`PM2 restarted process '${process}'`);
+                }
+                this.bot.sendMessage(
+                    steamID,
+                    err
+                        ? `❌ PM2 has failed to restart process '${process}'.\`\`\`${err.toString()}\`\`\``
+                        : `✅ PM2 has restarted process '${process}'.`
+                );
+            });
+            return;
+        }
+        if (typeof params.stop === 'string') {
+            const process = params.stop;
+            this.bot.sendMessage(steamID, `⚠️ Telling PM2 to stop process '${process}'.`);
+            pm2.stop(params.stop, err => {
+                if (err) {
+                    log.error(`PM2 failed to stop process '${process}':`, err);
+                } else {
+                    log.info(`PM2 stopped process '${process}'`);
+                }
+                this.bot.sendMessage(
+                    steamID,
+                    err
+                        ? `❌ PM2 has failed to stop process '${process}'.\`\`\`${err.toString()}\`\`\``
+                        : `✅ PM2 has stopped process '${process}'.`
+                );
+            });
+            return;
+        }
+        if (CommandParser.removeCommand(message) === 'list') {
+            this.bot.sendMessage(steamID, '⚠️ Getting process list from PM2.');
+            pm2.list((err, list) => {
+                if (err) {
+                    log.warn(`PM2 failed to list all processes:`, err);
+                    this.bot.sendMessage(
+                        steamID,
+                        `❌ Failed to retrieve process list from PM2.\`\`\`${err.toString()}\`\`\``
+                    );
+                } else {
+                    this.bot.sendMessage(
+                        steamID,
+                        `✅ Showing all PM2 processes.` +
+                            `\nID - (NAME, PID, CPU, MEMORY, STATUS, UPTIME)` +
+                            `\n${list
+                                .map(
+                                    obj =>
+                                        `${obj.pm_id} - (${obj.name}, ${obj.pid}, ${obj.monit.cpu}, ${(
+                                            obj.monit.memory / 1048576
+                                        ).toFixed(2)}mb, ${obj.pm2_env.status}, ${timeSince(obj.pm2_env.pm_uptime)})`
+                                )
+                                .join('\n')}`
+                    );
+                }
+            });
+            return;
+        }
+        return this.bot.sendMessage(steamID, `❌ Invalid parameter or type of parameter is incorrect.`);
     }
 }

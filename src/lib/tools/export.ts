@@ -3,7 +3,7 @@ import generateLinks, { Links } from './links';
 import * as pure from './pure';
 import * as replace from './replace';
 import stats from './stats';
-import { timeNow, convertTime, uptime } from './time';
+import { timeNow, convertTime, uptime, timeSince } from './time';
 import valueDiff, { ValueDiff } from './valueDiff';
 import listItems from './summarizeItems';
 import summarize, { summarizeToChat } from './summarizeOffer';
@@ -28,5 +28,6 @@ export {
     convertTime,
     profit,
     itemStats,
-    testPriceKey
+    testPriceKey,
+    timeSince
 };

@@ -1,5 +1,5 @@
 {
-    "name": "tf2autobot",
+    "name": "tf2autobot-neko",
     "version": "5.9.1",
     "description": "Fully automated TF2 trading bot advertising on www.backpack.tf using prices from www.prices.tf, Originally made by Nicklason.",
     "main": "dist/app.js",
@@ -15,16 +15,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/TF2Autobot/tf2autobot.git"
+        "url": "git+https://github.com/joe20050108/tf2autobot-neko.git"
     },
-    "author": "TF2Autobot/IdiNium",
+    "author": "TF2Autobot-Neko/joe20050108",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/TF2Autobot/tf2autobot/issues"
+        "url": "https://github.com/joe20050108/tf2autobot-neko/issues"
     },
     "updaterepo": true,
     "updateMessage": "",
-    "homepage": "https://github.com/TF2Autobot/tf2autobot#readme",
+    "homepage": "https://github.com/joe20050108/tf2autobot-neko#readme",
     "dependencies": {
         "@tf2autobot/bptf-listings": "^5.7.6",
         "@tf2autobot/bptf-login": "^2.3.6",
