@@ -15,16 +15,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/joe20050108/tf2autobot-neko.git"
+        "url": "git+https://github.com/juniorISO69960/tf2autobot-neko.git"
     },
-    "author": "TF2Autobot-Neko/joe20050108",
+    "author": "TF2Autobot-Neko/juniorISO69960",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/joe20050108/tf2autobot-neko/issues"
+        "url": "https://github.com/juniorISO69960/tf2autobot-neko/issues"
     },
     "updaterepo": true,
     "updateMessage": "",
-    "homepage": "https://github.com/joe20050108/tf2autobot-neko#readme",
+    "homepage": "https://github.com/juniorISO69960/tf2autobot-neko#readme",
     "dependencies": {
         "@tf2autobot/bptf-listings": "^5.7.7",
         "@tf2autobot/bptf-login": "^2.3.7",

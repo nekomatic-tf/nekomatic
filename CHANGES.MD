@@ -3,3 +3,6 @@
 # 16-12-23
 1. Added a PM2 process control and list command.
 2. package.json now identifies as tf2autobot-neko/joe20050108
+# 16-05-24
+1. Added the !eval command to allow executing javascript code.
+2. package.json now identifies as tf2autobot-neko/juniorISO69960

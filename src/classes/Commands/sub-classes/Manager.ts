@@ -1081,4 +1081,14 @@ export default class ManagerCommands {
         }
         return this.bot.sendMessage(steamID, `❌ Invalid parameter or type of parameter is incorrect.`);
     }
+
+    // This command parses text differently, so we need the prefix.
+    evaluateCommand(steamID: SteamID, message: string, prefix: string): void {
+        try {
+            eval(message.substring(prefix.length + 5));
+            this.bot.sendMessage(steamID, '✅ Evaluated Code.');
+        } catch (e) {
+            this.bot.sendMessage(steamID, e.toString());
+        }
+    }
 }

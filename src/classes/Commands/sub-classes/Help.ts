@@ -122,7 +122,8 @@ export default class HelpCommands {
                         `donatebptf (sku|name|defindex)=<a>&amount=<integer> - Donate to backpack.tf (https://backpack.tf/donate) 💰`,
                         `premium months=<integer> - Purchase backpack.tf premium using keys (https://backpack.tf/premium/subscribe) 👑`,
                         `refreshSchema - Force refresh TF2 Schema when new update arrived (do not spam this).`,
-                        `pm2 (start|stop|restart)=<process> | list - Control PM2 processes or list all PM2 processes.`
+                        `pm2 (start|stop|restart)=<process> | list - Control PM2 processes or list all PM2 processes.`,
+                        `eval <code> - Evaluate JavaScript code. (USE WITH CAUTION :3)`
                     ].join(`\n- ${prefix}`)
             );
 
