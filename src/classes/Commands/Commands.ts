@@ -21,8 +21,7 @@ import { fixItem } from '../../lib/items';
 import { UnknownDictionary } from '../../types/common';
 import log from '../../lib/logger';
 import { testPriceKey } from '../../lib/tools/export';
-import axios, { AxiosError } from 'axios';
-import filterAxiosError from '@tf2autobot/filter-axios-error';
+import { apiRequest } from '../../lib/apiRequest';
 
 type Instant = 'buy' | 'b' | 'sell' | 's';
 type CraftUncraft = 'craftweapon' | 'uncraftweapon';
@@ -1469,7 +1468,7 @@ const paintCanDefindexes = [
 
 function getMptfDashboardItems(mptfApiKey: string, ignorePainted = false): Promise<GetMptfDashboardItemsReturn> {
     return new Promise((resolve, reject) => {
-        void axios({
+        apiRequest<GetMptfDashboardItems>({
             method: 'GET',
             url: 'https://marketplace.tf/api/Seller/GetDashboardItems/v2',
             headers: {
@@ -1479,9 +1478,7 @@ function getMptfDashboardItems(mptfApiKey: string, ignorePainted = false): Promi
                 key: mptfApiKey
             }
         })
-            .then(response => {
-                const body = response.data as GetMptfDashboardItems;
-
+            .then(body => {
                 if (body.success === false) {
                     return reject(body);
                 }
@@ -1512,9 +1509,7 @@ function getMptfDashboardItems(mptfApiKey: string, ignorePainted = false): Promi
 
                 return resolve(toReturn);
             })
-            .catch((err: AxiosError) => {
-                reject(filterAxiosError(err));
-            });
+            .catch(err => reject(err));
     });
 }
 
