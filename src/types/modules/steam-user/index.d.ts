@@ -33,6 +33,10 @@ declare module 'steam-user' {
 
     type Apps = GamePlayed | GamesPlayed;
 
+    interface RichPresence {
+        steam_display?: string;
+    }
+
     export enum EResult {
         Invalid = 0,
 
@@ -506,6 +510,8 @@ declare module 'steam-user' {
         setPersona(state: number, name?: string): void;
 
         gamesPlayed(apps: Apps, force?: boolean): void;
+
+        uploadRichPresence(appId: GameId, richPresence: RichPresence): void;
 
         chatMessage(recipient: SteamID | string, message: string): void;
 

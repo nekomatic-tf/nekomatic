@@ -1,5 +1,5 @@
 import SKU from '@tf2autobot/tf2-sku';
-import { EClanRelationship, EFriendRelationship, EPersonaState } from 'steam-user';
+import { EClanRelationship, EFriendRelationship, EPersonaState, RichPresence } from 'steam-user';
 import TradeOfferManager, {
     TradeOffer,
     PollData,
@@ -148,6 +148,32 @@ export default class MyHandler extends Handler {
         return customGameName ? customGameName : `TF2Autobot`;
     }
 
+    get richPresence(): RichPresenceObject {
+        const matchGroup = () => {
+            switch (this.opt.miscSettings.game.matchGroup) {
+                case 'Special Event':
+                    return 'SpecialEvent';
+                case 'Mann Up':
+                    return 'MannUp';
+                case 'Competitive':
+                    return 'Competitive6v6';
+                case 'Casual':
+                    return 'Casual';
+                case 'Boot Camp':
+                    return 'BootCamp';
+                default:
+                    return 'SpecialEvent';
+            }
+        };
+
+        return {
+            steam_display: '#TF_RichPresence_Display',
+            state: 'PlayingMatchGroup',
+            matchgrouploc: matchGroup(),
+            currentmap: this.customGameName
+        };
+    }
+
     private get isCraftingManual(): boolean {
         return this.opt.crafting.manual;
     }
@@ -237,7 +263,7 @@ export default class MyHandler extends Handler {
                 .toFixed(0)} s`
         );
 
-        this.bot.client.gamesPlayed(this.opt.miscSettings.game.playOnlyTF2 ? 440 : [this.customGameName, 440]);
+        this.bot.setPresence();
         this.bot.client.setPersona(EPersonaState.Online);
 
         this.botSteamID = this.bot.client.steamID;
@@ -429,9 +455,10 @@ export default class MyHandler extends Handler {
     }
 
     onLoggedOn(): void {
+        this.bot.client.setPersona(EPersonaState.Snooze);
         if (this.bot.isReady) {
             this.bot.client.setPersona(EPersonaState.Online);
-            this.bot.client.gamesPlayed(this.opt.miscSettings.game.playOnlyTF2 ? 440 : [this.customGameName, 440]);
+            this.bot.setPresence();
         }
     }
 
@@ -2269,7 +2296,7 @@ export default class MyHandler extends Handler {
                 this.sentSummary = {};
             }, 2 * 60 * 1000);
         } else {
-            this.bot.client.gamesPlayed(this.opt.miscSettings.game.playOnlyTF2 ? 440 : [this.customGameName, 440]);
+            this.bot.setPresence();
         }
     }
 
@@ -2638,7 +2665,7 @@ export default class MyHandler extends Handler {
 
     onTF2QueueCompleted(): void {
         log.debug('Queue finished');
-        this.bot.client.gamesPlayed(this.opt.miscSettings.game.playOnlyTF2 ? 440 : [this.customGameName, 440]);
+        this.bot.setPresence();
     }
 
     onCreateListingsSuccessful(response: { created: number; archived: number; errors: any[] }): void {
@@ -2758,4 +2785,10 @@ interface GetHighValue {
 interface Which {
     items: Record<string, any>;
     isMention: boolean;
+}
+
+interface RichPresenceObject extends RichPresence {
+    state?: string;
+    matchgrouploc?: string;
+    currentmap?: string;
 }

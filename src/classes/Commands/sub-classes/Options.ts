@@ -908,22 +908,11 @@ export default class OptionsCommands {
                 deepMerge(opt, saveOptions);
                 const msg = '✅ Updated options!';
 
-                if (knownParams.miscSettings?.game?.playOnlyTF2 === true) {
+                // --- Game Status Real Time Updater ---
+                if (knownParams.miscSettings?.game) {
+                    // If these do not match, update
                     this.bot.client.gamesPlayed([]);
-                    this.bot.client.gamesPlayed(440);
-                }
-
-                if (typeof knownParams.miscSettings?.game?.customName === 'string') {
-                    this.bot.client.gamesPlayed([]);
-                    this.bot.client.gamesPlayed(
-                        (
-                            knownParams.miscSettings?.game?.playOnlyTF2 !== undefined
-                                ? knownParams.miscSettings.game.playOnlyTF2
-                                : opt.miscSettings.game.playOnlyTF2
-                        )
-                            ? 440
-                            : [knownParams.miscSettings.game.customName, 440]
-                    );
+                    this.bot.setPresence();
                 }
 
                 if (knownParams.statistics?.sendStats?.enable === true) {

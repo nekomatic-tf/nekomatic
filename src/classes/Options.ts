@@ -45,6 +45,8 @@ export const DEFAULTS: JsonOptions = {
         },
         game: {
             playOnlyTF2: false,
+            useRichPresence: false,
+            matchGroup: 'Special Event',
             customName: ''
         },
         alwaysRemoveItemAttributes: {
@@ -1191,6 +1193,8 @@ interface CheckUses {
 
 interface Game {
     playOnlyTF2?: boolean;
+    useRichPresence?: boolean;
+    matchGroup?: 'Special Event' | 'Mann Up' | 'Competitive' | 'Casual' | 'Boot Camp';
     customName?: string;
 }
 

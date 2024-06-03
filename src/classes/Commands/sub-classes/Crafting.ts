@@ -152,9 +152,7 @@ export default class CraftingCommands {
                     this.isCrafting = false;
 
                     this.bot.client.gamesPlayed([]);
-                    this.bot.client.gamesPlayed(
-                        this.bot.options.miscSettings.game.playOnlyTF2 ? 440 : [this.bot.handler.customGameName, 440]
-                    );
+                    this.bot.setPresence();
 
                     if (crafted < amountToCraft) {
                         return this.bot.sendMessage(

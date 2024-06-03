@@ -455,6 +455,29 @@ export const optionsSchema: jsonschema.Schema = {
                         playOnlyTF2: {
                             type: 'boolean'
                         },
+                        useRichPresence: {
+                            type: 'boolean'
+                        },
+                        matchGroup: {
+                            type: 'string',
+                            anyOf: [
+                                {
+                                    const: 'Special Event'
+                                },
+                                {
+                                    const: 'Mann Up'
+                                },
+                                {
+                                    const: 'Competitive'
+                                },
+                                {
+                                    const: 'Casual'
+                                },
+                                {
+                                    const: 'Boot Camp'
+                                }
+                            ]
+                        },
                         customName: {
                             type: 'string',
                             maxLength: 60
