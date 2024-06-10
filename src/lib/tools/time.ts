@@ -158,6 +158,26 @@ export function uptime(): string {
     }
 }
 
+import os from 'os';
+
+export function systemUptime(): string {
+    const currentTime = dayjs();
+    const uptimeAsMoment = dayjs.unix(currentTime.unix() - os.uptime());
+    const hoursDiff = currentTime.diff(uptimeAsMoment, 'hour');
+    const daysDiff = currentTime.diff(uptimeAsMoment, 'day');
+
+    // If the system has been up for ~1 day, show the exact amount of hours
+    // If the system has been up for ~1 month, show the exact amount of days
+    // Otherwise, show the uptime as it is
+    if (hoursDiff >= 21.5 && hoursDiff < 35.5) {
+        return `System has been up for a day (${hoursDiff} hours).`;
+    } else if (daysDiff >= 25.5) {
+        return `System has been up for a month (${daysDiff} days).`;
+    } else {
+        return `System has been up for ${uptimeAsMoment.from(currentTime, true)}.`;
+    }
+}
+
 export function timeSince(date) {
     const seconds = Math.floor((new Date().valueOf() - date) / 1000);
 

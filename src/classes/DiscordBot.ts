@@ -86,6 +86,10 @@ export default class DiscordBot {
             return; // don't talk to myself
         }
 
+        if (message.author.bot) {
+            return; // ignore bots
+        }
+
         if (message.webhookId) {
             return; // Ignore webhook messages
         }

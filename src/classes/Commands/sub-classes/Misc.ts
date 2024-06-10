@@ -7,7 +7,7 @@ import { removeLinkProtocol } from '../functions/utils';
 import CommandParser from '../../CommandParser';
 import Bot from '../../Bot';
 import { Discord, Stock } from '../../Options';
-import { pure, timeNow, uptime, testPriceKey } from '../../../lib/tools/export';
+import { pure, timeNow, uptime, testPriceKey, systemUptime } from '../../../lib/tools/export';
 import getAttachmentName from '../../../lib/tools/getAttachmentName';
 
 type Misc = 'time' | 'uptime' | 'pure' | 'rate' | 'owner' | 'discord' | 'stock';
@@ -55,7 +55,13 @@ export default class MiscCommands {
             );
         } else if (command === 'uptime') {
             const botUptime = uptime();
-            this.bot.sendMessage(steamID, custom ? custom.replace(/%uptime%/g, botUptime) : botUptime);
+            const sysUptime = systemUptime();
+            this.bot.sendMessage(
+                steamID,
+                custom
+                    ? `${custom.replace(/%uptime%/g, botUptime)}\n${custom.replace(/%uptime%/g, sysUptime)}`
+                    : `${botUptime}\n${sysUptime}`
+            );
         } else if (command === 'pure') {
             const pureStock = pure.stock(this.bot);
             this.bot.sendMessage(

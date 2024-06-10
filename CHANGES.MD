@@ -6,3 +6,6 @@
 # 16-05-24
 1. Added the !eval command to allow executing javascript code.
 2. package.json now identifies as tf2autobot-neko/juniorISO69960
+# 10-06-24
+1. package.json now identifies as nekomatic/nekomatic-tf
+2. !uptime now shows the system uptime as well
