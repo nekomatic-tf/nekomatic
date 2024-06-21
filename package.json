@@ -1,7 +1,7 @@
 {
     "name": "nekomatic",
     "version": "5.12.2",
-    "description": "Fully automated TF2 trading bot advertising on www.backpack.tf using prices from www.prices.tf, Originally made by Nicklason.",
+    "description": "nyan~ nyan~",
     "main": "dist/app.js",
     "scripts": {
         "release": "np --no-cleanup --no-publish",
