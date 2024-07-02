@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-console
+console.log('Be gay, do crime.');
 try {
     // only installed in dev mode
     // eslint-disable-next-line @typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment
