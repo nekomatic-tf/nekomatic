@@ -7,7 +7,10 @@ import {
     DiscordAPIError,
     Snowflake,
     ActivityType,
-    ApplicationCommandType
+    ApplicationCommandType,
+    EmbedBuilder,
+    ChannelType,
+    PermissionsBitField
 } from 'discord.js';
 import log from '../lib/logger';
 import Options from './Options';
@@ -140,6 +143,25 @@ export default class DiscordBot {
         }
     }
 
+    public sendEmbedAnswer(
+        origMessage: Message,
+        messageToSend: string,
+        embedsToSend: EmbedBuilder | EmbedBuilder[]
+    ): void {
+        if (
+            origMessage.channel.type === ChannelType.DM ||
+            origMessage.guild.members.me.permissionsIn(origMessage.channel).has(PermissionsBitField.Flags.EmbedLinks)
+        ) {
+            if (Array.isArray(embedsToSend)) {
+                this.sendEmbeds(origMessage, embedsToSend);
+            } else {
+                this.sendEmbeds(origMessage, [embedsToSend]);
+            }
+        } else {
+            this.sendAnswer(origMessage, messageToSend);
+        }
+    }
+
     public sendAnswer(origMessage: Message, messageToSend: string): void {
         messageToSend = messageToSend.trim();
         const formattedMessage = DiscordBot.reformat(messageToSend);
@@ -164,6 +186,15 @@ export default class DiscordBot {
         } else {
             this.sendMessage(origMessage, formattedMessage); // TODO: normal parsing of markup things
         }
+    }
+
+    private sendEmbeds(origMessage: Message, embeds: EmbedBuilder[]): void {
+        origMessage.channel
+            .send({ embeds })
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            .then(() => log.info(`Embed sent to ${origMessage.author.tag} (${origMessage.author.id})`))
+            .catch(err => log.error('Failed to send message to Discord:', err));
     }
 
     private sendMessage(origMessage: Message, message: string): void {

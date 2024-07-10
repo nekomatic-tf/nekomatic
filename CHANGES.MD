@@ -9,3 +9,5 @@
 # 10-06-24
 1. package.json now identifies as nekomatic/nekomatic-tf
 2. !uptime now shows the system uptime as well
+# 10-07-24
+1. Embed support for discord messages
