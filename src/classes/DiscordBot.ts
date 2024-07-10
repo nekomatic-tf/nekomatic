@@ -7,7 +7,6 @@ import {
     DiscordAPIError,
     Snowflake,
     ActivityType,
-    ApplicationCommandType,
     EmbedBuilder,
     ChannelType,
     PermissionsBitField
@@ -16,7 +15,6 @@ import log from '../lib/logger';
 import Options from './Options';
 import Bot from './Bot';
 import SteamID from 'steamid';
-import { uptime } from '../lib/tools/time';
 
 export default class DiscordBot {
     readonly client: Client;
@@ -44,21 +42,6 @@ export default class DiscordBot {
     public async start(): Promise<void> {
         try {
             await this.client.login(this.options.discordBotToken);
-            await this.client.application.commands.set([
-                {
-                    name: 'uptime',
-                    description: 'Show bot uptime',
-                    type: ApplicationCommandType.ChatInput
-                }
-            ]);
-
-            this.client.on('interactionCreate', async interaction => {
-                if (!interaction.isChatInputCommand()) return;
-
-                if (interaction.commandName === 'uptime') {
-                    await interaction.reply({ content: uptime() });
-                }
-            });
         } catch (err) {
             const error = err as DiscordAPIError;
 

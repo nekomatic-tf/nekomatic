@@ -11,3 +11,4 @@
 2. !uptime now shows the system uptime as well
 # 10-07-24
 1. Embed support for discord messages
+2. Removed the uptime slash command
