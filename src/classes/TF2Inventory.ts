@@ -135,7 +135,7 @@ export default class TF2Inventory {
                 method: 'GET',
                 url: 'https://backpack.tf/item/' + assetid,
                 headers: {
-                    'User-Agent': 'TF2Autobot@' + process.env.BOT_VERSION,
+                    'User-Agent': 'Nekomatic@' + process.env.BOT_VERSION,
                     Cookie: 'user-id=' + userID // uid(12)
                 }
             })

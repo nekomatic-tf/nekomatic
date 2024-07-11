@@ -408,6 +408,6 @@ export default class StatusCommands {
     }
 
     versionCommand(steamID: SteamID): void {
-        this.bot.sendMessage(steamID, `Currently running TF2Autobot@v${process.env.BOT_VERSION}.`);
+        this.bot.sendMessage(steamID, `Currently running Nekomatic@v${process.env.BOT_VERSION}.`);
     }
 }

@@ -90,7 +90,7 @@ export default class PricesTfApi {
             url: path,
             baseURL: customURL ? customURL : this.URL,
             headers: {
-                'User-Agent': 'TF2Autobot@' + process.env.BOT_VERSION,
+                'User-Agent': 'Nekomatic@' + process.env.BOT_VERSION,
                 ...headers
             },
             timeout: 30000

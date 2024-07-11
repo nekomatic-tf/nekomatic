@@ -1470,7 +1470,7 @@ function getMptfDashboardItems(mptfApiKey: string, ignorePainted = false): Promi
             method: 'GET',
             url: 'https://marketplace.tf/api/Seller/GetDashboardItems/v2',
             headers: {
-                'User-Agent': 'TF2Autobot@' + process.env.BOT_VERSION
+                'User-Agent': 'Nekomatic@' + process.env.BOT_VERSION
             },
             params: {
                 key: mptfApiKey

@@ -942,10 +942,10 @@ export default class Bot {
                                         token: this.options.bptfAccessToken,
                                         userID: this.userID,
                                         userAgent:
-                                            'TF2Autobot' +
+                                            'Nekomatic' +
                                             (this.options.useragentHeaderCustom !== ''
                                                 ? ` - ${this.options.useragentHeaderCustom}`
-                                                : ' - Run your own bot for free'),
+                                                : ' - Trading done nyah style~'),
                                         schema: this.schema
                                     });
 

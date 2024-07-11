@@ -262,7 +262,7 @@ export default class MyHandler extends Handler {
 
     onReady(): void {
         log.info(
-            `TF2Autobot v${process.env.BOT_VERSION} is ready | ${pluralize(
+            `Nekomatic v${process.env.BOT_VERSION} is ready | ${pluralize(
                 'item',
                 this.bot.pricelist.getLength,
                 true
@@ -2537,7 +2537,7 @@ export default class MyHandler extends Handler {
                 url: 'https://api.backpack.tf/api/users/info/v1',
                 method: 'GET',
                 headers: {
-                    'User-Agent': 'TF2Autobot@' + process.env.BOT_VERSION,
+                    'User-Agent': 'Nekomatic@' + process.env.BOT_VERSION,
                     Cookie: 'user-id=' + this.bot.userID
                 },
                 params: {

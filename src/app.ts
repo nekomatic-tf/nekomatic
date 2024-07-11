@@ -102,7 +102,7 @@ ON_DEATH({ uncaughtException: true })((signalOrErr, origin: string | Error) => {
         }
 
         const errorMessage = [
-            'TF2Autobot' +
+            'Nekomatic' +
                 (!botReady
                     ? ' failed to start properly, this is most likely a temporary error. See the log:'
                     : ' crashed! Please create an issue with the following log:'),
