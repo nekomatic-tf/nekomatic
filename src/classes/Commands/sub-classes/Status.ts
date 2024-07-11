@@ -408,66 +408,6 @@ export default class StatusCommands {
     }
 
     versionCommand(steamID: SteamID): void {
-        this.bot.sendMessage(
-            steamID,
-            `Currently running TF2Autobot@v${process.env.BOT_VERSION}. Checking for a new version...`
-        );
-
-        this.bot.checkForUpdates
-            .then(async ({ hasNewVersion, latestVersion, canUpdateRepo, updateMessage, newVersionIsMajor }) => {
-                if (!hasNewVersion) {
-                    this.bot.sendMessage(steamID, 'You are running the latest version of TF2Autobot!');
-                } else if (this.bot.lastNotifiedVersion === latestVersion) {
-                    this.bot.sendMessage(
-                        steamID,
-                        `⚠️ Update available! Current: v${process.env.BOT_VERSION}, Latest: v${latestVersion}.` +
-                            `\n\n📰 Release note: https://github.com/TF2Autobot/tf2autobot/releases` +
-                            (updateMessage ? `\n\n💬 Update message: ${updateMessage}` : '')
-                    );
-                    await timersPromises.setTimeout(1000);
-
-                    if (this.bot.isCloned() && process.env.pm_id !== undefined && canUpdateRepo) {
-                        return this.bot.sendMessage(
-                            steamID,
-                            newVersionIsMajor
-                                ? '⚠️ !updaterepo is not available. Please upgrade the bot manually.'
-                                : `✅ Update now with !updaterepo command now!`
-                        );
-                    }
-
-                    const messages: string[] = [];
-
-                    if (!this.bot.isCloned()) {
-                        return this.bot.sendMessage(steamID, `⚠️ The bot local repository is not cloned from Github.`);
-                    }
-
-                    if (process.platform === 'win32') {
-                        messages.concat([
-                            '\n💻 To update run the following command inside your tf2autobot directory using Command Prompt:\n',
-                            '/code rmdir /s /q node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && node dist/app.js'
-                        ]);
-                    } else if (['win32', 'linux', 'darwin', 'openbsd', 'freebsd'].includes(process.platform)) {
-                        messages.concat([
-                            '\n💻 To update run the following command inside your tf2autobot directory:\n',
-                            '/code rm -r node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && pm2 restart ecosystem.json'
-                        ]);
-                    } else {
-                        messages.concat([
-                            '❌ Failed to find what OS your server is running! Kindly run the following standard command for most users inside your tf2autobot folder:\n',
-                            '/code rm -r node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && pm2 restart ecosystem.json'
-                        ]);
-                    }
-
-                    for (const message of messages) {
-                        await timersPromises.setTimeout(1000);
-                        this.bot.sendMessage(steamID, message);
-                    }
-                }
-            })
-            .catch(err => {
-                const errStringify = JSON.stringify(err);
-                const errMessage = errStringify === '' ? (err as Error)?.message : errStringify;
-                this.bot.sendMessage(steamID, `❌ Failed to check for updates: ${errMessage}`);
-            });
+        this.bot.sendMessage(steamID, `Currently running TF2Autobot@v${process.env.BOT_VERSION}.`);
     }
 }

@@ -10,12 +10,9 @@ import BptfLogin from '@tf2autobot/bptf-login';
 import TF2 from '@tf2autobot/tf2';
 import dayjs, { Dayjs } from 'dayjs';
 import async from 'async';
-import semver from 'semver';
 import { AxiosError } from 'axios';
 import pluralize from 'pluralize';
 import * as timersPromises from 'timers/promises';
-import fs from 'fs';
-import path from 'path';
 import * as files from '../lib/files';
 
 import jwt from 'jsonwebtoken';
@@ -478,114 +475,6 @@ export default class Bot {
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/no-unsafe-argument
                 setImmediate(listener, ...args);
             }
-        });
-    }
-
-    startVersionChecker(): void {
-        void this.checkForUpdates;
-
-        // Check for updates every 10 minutes
-        setInterval(() => {
-            this.checkForUpdates.catch(err => {
-                log.error('Failed to check for updates: ', err);
-            });
-        }, 10 * 60 * 1000);
-    }
-
-    get checkForUpdates(): Promise<{
-        hasNewVersion: boolean;
-        latestVersion: string;
-        canUpdateRepo: boolean;
-        updateMessage: string;
-        newVersionIsMajor: boolean;
-    }> {
-        return this.getLatestVersion().then(async content => {
-            const latestVersion = content.version;
-            const canUpdateRepo = semver.compare(process.env.BOT_VERSION, '5.6.0') !== -1 && content.canUpdateRepo;
-            const updateMessage = content.updateMessage;
-
-            const hasNewVersion = semver.lt(process.env.BOT_VERSION, latestVersion);
-            const newVersionIsMajor = semver.diff(process.env.BOT_VERSION, latestVersion) === 'major';
-
-            if (this.lastNotifiedVersion !== latestVersion && hasNewVersion) {
-                this.lastNotifiedVersion = latestVersion;
-
-                this.messageAdmins(
-                    'version',
-                    `⚠️ Update available! Current: v${process.env.BOT_VERSION}, Latest: v${latestVersion}.` +
-                        `\n\n📰 Release note: https://github.com/TF2Autobot/tf2autobot/releases` +
-                        (updateMessage ? `\n\n💬 Update message: ${updateMessage}` : ''),
-                    []
-                );
-
-                await timersPromises.setTimeout(1000);
-
-                if (this.isCloned() && process.env.pm_id !== undefined && canUpdateRepo) {
-                    this.messageAdmins(
-                        'version',
-                        newVersionIsMajor
-                            ? '⚠️ !updaterepo is not available. Please upgrade the bot manually.'
-                            : `✅ Update now with !updaterepo command now!`,
-                        []
-                    );
-                    return { hasNewVersion, latestVersion, canUpdateRepo, updateMessage, newVersionIsMajor };
-                }
-
-                if (!this.isCloned()) {
-                    this.messageAdmins('version', `⚠️ The bot local repository is not cloned from Github.`, []);
-                }
-
-                let messages: string[];
-
-                if (process.platform === 'win32') {
-                    messages = [
-                        '\n💻 To update run the following command inside your tf2autobot directory using Command Prompt:\n',
-                        '/code rmdir /s /q node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && node dist/app.js'
-                    ];
-                } else if (['win32', 'linux', 'darwin', 'openbsd', 'freebsd'].includes(process.platform)) {
-                    messages = [
-                        '\n💻 To update run the following command inside your tf2autobot directory:\n',
-                        '/code rm -r node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && pm2 restart ecosystem.json'
-                    ];
-                } else {
-                    messages = [
-                        '❌ Failed to find what OS your server is running! Kindly run the following standard command for most users inside your tf2autobot folder:\n',
-                        '/code rm -r node_modules dist && git reset HEAD --hard && git pull --prune && npm install --no-audit && npm run build && pm2 restart ecosystem.json'
-                    ];
-                }
-
-                for (const message of messages) {
-                    await timersPromises.setTimeout(1000);
-                    this.messageAdmins('version', message, []);
-                }
-            }
-
-            return { hasNewVersion, latestVersion, canUpdateRepo, updateMessage, newVersionIsMajor };
-        });
-    }
-
-    private getLatestVersion(
-        attempt: 'first' | 'retry' = 'first'
-    ): Promise<{ version: string; canUpdateRepo: boolean; updateMessage: string }> {
-        return new Promise((resolve, reject) => {
-            apiRequest<GithubPackageJson>({
-                method: 'GET',
-                url: 'https://raw.githubusercontent.com/TF2Autobot/tf2autobot/master/package.json',
-                signal: axiosAbortSignal(60000)
-            })
-                .then(data => {
-                    return resolve({
-                        version: data.version,
-                        canUpdateRepo: data.updaterepo,
-                        updateMessage: data.updateMessage
-                    });
-                })
-                .catch(err => {
-                    if (err instanceof AbortSignal && attempt !== 'retry') {
-                        return this.getLatestVersion('retry');
-                    }
-                    reject(err);
-                });
         });
     }
 
@@ -1214,7 +1103,6 @@ export default class Bot {
                     this.setReady = true;
                     this.handler.onReady();
                     this.manager.doPoll();
-                    this.startVersionChecker();
                     this.initResetCacheInterval();
 
                     if (this.options.discordBotToken && this.discordBot && !this.halted) {
@@ -1737,14 +1625,4 @@ export default class Bot {
 
         this.handler.onLoginAttempts(this.loginAttempts.map(attempt => attempt.unix()));
     }
-
-    isCloned(): boolean {
-        return fs.existsSync(path.resolve(__dirname, '..', '..', '.git'));
-    }
-}
-
-interface GithubPackageJson {
-    version: string;
-    updaterepo: boolean;
-    updateMessage: string;
 }
