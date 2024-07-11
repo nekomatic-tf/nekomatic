@@ -47,17 +47,12 @@ const paths = genPaths(options.steamAccountName);
 import log, { init } from './lib/logger';
 init(paths, options);
 
-if (process.env.pm_id === undefined && process.env.DOCKER === undefined) {
-    log.warn(
-        "You are not running the bot with PM2! If the bot crashes it won't start again." +
-            ' Get a VPS and run your bot with PM2: https://github.com/TF2Autobot/tf2autobot/wiki/Getting-a-VPS'
-    );
-}
-
-if (process.env.DOCKER !== undefined) {
-    log.warn(
-        'You are running the bot with Docker! If the bot crashes, it will start again only if you run the container with --restart=always'
-    );
+if (process.env.pm_id) {
+    log.info(`${process.env.BOT_NAME} v${process.env.BOT_VERSION} started with PM2 (PM2 ID: ${process.env.pm_id})`);
+} else if (process.env.DOCKER) {
+    log.info(`${process.env.BOT_NAME} v${process.env.BOT_VERSION} started with Docker.`);
+} else {
+    log.warn(`${process.env.BOT_NAME} v${process.env.BOT_VERSION} started without PM2 or Docker.`);
 }
 
 import SchemaManager from '@tf2autobot/tf2-schema';
