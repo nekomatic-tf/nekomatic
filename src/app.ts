@@ -11,11 +11,12 @@ try {
 }
 import 'module-alias/register';
 // eslint-disable-next-line @typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment
-const { version: BOT_VERSION } = require('../package.json');
+const { version: BOT_VERSION, name: BOT_NAME } = require('../package.json');
 import { getPricer } from './lib/pricer/pricer';
 import { loadOptions } from './classes/Options';
 
 process.env.BOT_VERSION = BOT_VERSION as string;
+process.env.BOT_NAME = BOT_NAME as string;
 
 import fs from 'fs';
 import path from 'path';
