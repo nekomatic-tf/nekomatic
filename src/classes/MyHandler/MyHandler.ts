@@ -182,6 +182,8 @@ export default class MyHandler extends Handler {
         return this.opt.miscSettings.deleteUntradableJunk.enable;
     }
 
+    private donated = 0;
+
     private isPremium = false;
 
     private botName = '';
@@ -191,7 +193,13 @@ export default class MyHandler extends Handler {
     private botSteamID: SteamID;
 
     get getBotInfo(): BotInfo {
-        return { name: this.botName, avatarURL: this.botAvatarURL, steamID: this.botSteamID, premium: this.isPremium };
+        return {
+            name: this.botName,
+            avatarURL: this.botAvatarURL,
+            steamID: this.botSteamID,
+            donated: this.donated,
+            premium: this.isPremium
+        };
     }
 
     recentlySentMessage: UnknownDictionary<number> = {};
@@ -2541,6 +2549,7 @@ export default class MyHandler extends Handler {
                     const user = body.users[steamID64];
                     this.botName = user.name;
                     this.botAvatarURL = user.avatar;
+                    this.donated = user.donated ? user.donated : 0;
                     this.isPremium = user.premium ? user.premium === 1 : false;
                     return resolve();
                 })
@@ -2774,6 +2783,7 @@ export interface BotInfo {
     name: string;
     avatarURL: string;
     steamID: SteamID;
+    donated: number;
     premium: boolean;
 }
 
