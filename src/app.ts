@@ -62,7 +62,7 @@ import { apiRequest } from './lib/apiRequest';
 
 /*eslint-disable */
 SchemaManager.prototype.getSchema = function (callback): void {
-    apiRequest({ method: 'GET', url: 'https://schema.autobot.tf/schema' })
+    apiRequest({ method: 'GET', url: `${options.schemaServerUrl}/schema` })
         .then(schema => {
             this.setSchema(schema, true);
             callback(null, this.schema);
