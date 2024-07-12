@@ -12,3 +12,9 @@
 # 10-07-24
 1. Embed support for discord messages
 2. Removed the uptime slash command
+# 11-07-24
+1. Removed updaterepo command and related code
+2. Replaced docker and pm2 warnings with cleaner messages
+3. Replaced useragents from 'TF2Autobot' to 'Nekomatic'
+4. Store package.json 'name' in process.env.BOT_NAME
+5. Support for a custom autobot schema server
