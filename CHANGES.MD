@@ -18,3 +18,5 @@
 3. Replaced useragents from 'TF2Autobot' to 'Nekomatic'
 4. Store package.json 'name' in process.env.BOT_NAME
 5. Support for a custom autobot schema server
+# 15-07-24
+1. Modernized the Discord message for when the bot is still booting up.

@@ -89,7 +89,15 @@ export default class DiscordBot {
         );
 
         if (!this.bot.isReady) {
-            this.sendAnswer(message, '🛑 The bot is still booting up, please wait');
+            this.sendEmbedAnswer(
+                message,
+                '⚠️ Please wait while the bot starts.',
+                new EmbedBuilder({
+                    color: 0xffff00,
+                    title: 'Warning',
+                    description: 'Please wait while the bot starts.'
+                })
+            );
             return;
         }
 
