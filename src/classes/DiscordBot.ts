@@ -34,8 +34,10 @@ export default class DiscordBot {
         });
 
         // 'ready' binding should be executed BEFORE the login() is complete
+        /* eslint-disable */
         this.client.on('ready', this.onClientReady.bind(this));
         this.client.on('messageCreate', async message => this.onMessage(message));
+        /* eslint-enable */
         this.prefix = this.bot.options.miscSettings?.prefixes?.discord ?? this.prefix;
     }
 
@@ -200,8 +202,8 @@ export default class DiscordBot {
             .send(message)
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            .then(() => log.info(`Message sent to ${origMessage.author.tag} (${origMessage.author.id}): ${message}`))
-            .catch(err => log.error('Failed to send message to Discord:', err));
+            .then(() => log.info(`Message sent to ${origMessage.author.tag} (${origMessage.author.id}): ${message}`));
+        // .catch((err: any) => log.error('Failed to send message to Discord:', err));
     }
 
     private async onClientReady() {
@@ -232,6 +234,7 @@ export default class DiscordBot {
     setPresence(type: 'online' | 'halt'): void {
         const opt = this.bot.options.discordChat[type];
 
+        /* eslint-disable */
         this.client?.user?.setPresence({
             activities: [
                 {
@@ -244,6 +247,7 @@ export default class DiscordBot {
             ],
             status: opt.status
         });
+        /* eslint-enable */
     }
 
     halt(): void {
