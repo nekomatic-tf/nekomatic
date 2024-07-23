@@ -145,7 +145,7 @@ export default class MyHandler extends Handler {
 
     get customGameName(): string {
         const customGameName = this.opt.miscSettings.game.customName;
-        return customGameName ? customGameName : `TF2Autobot`;
+        return customGameName ? customGameName : `Nekomatic`;
     }
 
     get richPresence(): RichPresenceObject {

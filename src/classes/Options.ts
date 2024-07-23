@@ -47,7 +47,7 @@ export const DEFAULTS: JsonOptions = {
             playOnlyTF2: false,
             useRichPresence: false,
             matchGroup: 'Special Event',
-            customName: 'Nekomatic - Nyah~ Nyah~',
+            customName: 'Nekomatic',
             partyName: 'nekomatic',
             partySize: 69
         },

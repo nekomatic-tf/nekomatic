@@ -25,3 +25,4 @@
 2. Rich Presence enhancements
     - Support for a custom party name
     - Support for a custom party size
+3. Changed customName default from "TF2Autobot" to "Nekomatic"
