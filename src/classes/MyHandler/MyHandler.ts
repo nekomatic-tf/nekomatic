@@ -168,6 +168,8 @@ export default class MyHandler extends Handler {
 
         return {
             steam_display: '#TF_RichPresence_Display',
+            steam_player_group: this.opt.miscSettings.game.partyName,
+            steam_player_group_size: this.opt.miscSettings.game.partySize.toString(),
             state: 'PlayingMatchGroup',
             matchgrouploc: matchGroup(),
             currentmap: this.customGameName
@@ -2799,6 +2801,8 @@ interface Which {
 
 interface RichPresenceObject extends RichPresence {
     state?: string;
+    steam_player_group?: string;
+    steam_player_group_size?: string;
     matchgrouploc?: string;
     currentmap?: string;
 }

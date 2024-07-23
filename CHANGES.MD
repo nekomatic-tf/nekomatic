@@ -22,3 +22,6 @@
 1. Modernized the Discord message for when the bot is still booting up.
 # 23-07-24
 1. Various bugfixes
+2. Rich Presence enhancements
+    - Support for a custom party name
+    - Support for a custom party size

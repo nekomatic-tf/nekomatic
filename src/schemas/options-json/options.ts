@@ -481,6 +481,12 @@ export const optionsSchema: jsonschema.Schema = {
                         customName: {
                             type: 'string',
                             maxLength: 60
+                        },
+                        partyName: {
+                            type: 'string'
+                        },
+                        partySize: {
+                            type: 'number'
                         }
                     },
                     required: ['playOnlyTF2', 'customName'],

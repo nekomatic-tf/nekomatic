@@ -35,6 +35,7 @@ declare module 'steam-user' {
 
     interface RichPresence {
         steam_display?: string;
+        connect?: string;
     }
 
     export enum EResult {

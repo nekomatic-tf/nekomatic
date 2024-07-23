@@ -47,7 +47,9 @@ export const DEFAULTS: JsonOptions = {
             playOnlyTF2: false,
             useRichPresence: false,
             matchGroup: 'Special Event',
-            customName: ''
+            customName: 'Nekomatic - Nyah~ Nyah~',
+            partyName: 'nekomatic',
+            partySize: 69
         },
         alwaysRemoveItemAttributes: {
             customTexture: {
@@ -1196,6 +1198,8 @@ interface Game {
     useRichPresence?: boolean;
     matchGroup?: 'Special Event' | 'Mann Up' | 'Competitive' | 'Casual' | 'Boot Camp';
     customName?: string;
+    partyName?: string;
+    partySize?: number;
 }
 
 // ------------ Counteroffer ------------
