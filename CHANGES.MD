@@ -20,3 +20,5 @@
 5. Support for a custom autobot schema server
 # 15-07-24
 1. Modernized the Discord message for when the bot is still booting up.
+# 23-07-24
+1. Various bugfixes

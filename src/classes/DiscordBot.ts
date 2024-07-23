@@ -146,9 +146,9 @@ export default class DiscordBot {
             origMessage.guild.members.me.permissionsIn(origMessage.channel).has(PermissionsBitField.Flags.EmbedLinks)
         ) {
             if (Array.isArray(embedsToSend)) {
-                this.sendEmbeds(origMessage, embedsToSend);
+                this.sendEmbed(origMessage, embedsToSend);
             } else {
-                this.sendEmbeds(origMessage, [embedsToSend]);
+                this.sendEmbed(origMessage, [embedsToSend]);
             }
         } else {
             this.sendAnswer(origMessage, messageToSend);
@@ -181,13 +181,13 @@ export default class DiscordBot {
         }
     }
 
-    private sendEmbeds(origMessage: Message, embeds: EmbedBuilder[]): void {
+    private sendEmbed(origMessage: Message, embeds: EmbedBuilder[]): void {
         origMessage.channel
             .send({ embeds })
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            .then(() => log.info(`Embed sent to ${origMessage.author.tag} (${origMessage.author.id})`))
-            .catch(err => log.error('Failed to send message to Discord:', err));
+            .then(() => log.info(`Embed sent to ${origMessage.author.tag} (${origMessage.author.id})`));
+        //  .catch(err => log.error('Failed to send message to Discord:', err));
     }
 
     private sendMessage(origMessage: Message, message: string): void {
