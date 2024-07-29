@@ -26,3 +26,6 @@
     - Support for a custom party name
     - Support for a custom party size
 3. Changed customName default from "TF2Autobot" to "Nekomatic"
+# 24-07-24
+1. Support for disabling trades that have items on both sides (anything other than metal or keys)
+2. Fixed avatars failing to send properly in the declined trade webhook
