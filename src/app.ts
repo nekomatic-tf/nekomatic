@@ -18,23 +18,8 @@ import { loadOptions } from './classes/Options';
 process.env.BOT_VERSION = BOT_VERSION as string;
 process.env.BOT_NAME = BOT_NAME as string;
 
-import fs from 'fs';
 import path from 'path';
 import genPaths from './resources/paths';
-
-if (!fs.existsSync(path.join(__dirname, '../node_modules'))) {
-    /* eslint-disable-next-line no-console */
-    console.error('Missing dependencies! Install them by running `npm install`');
-    process.exit(1);
-}
-
-import pjson from 'pjson';
-
-if (process.env.BOT_VERSION !== pjson.version) {
-    /* eslint-disable-next-line no-console */
-    console.error('You have a newer version on disk! Compile the code by running `npm run build`');
-    process.exit(1);
-}
 
 import 'bluebird-global';
 

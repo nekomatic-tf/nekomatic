@@ -29,3 +29,5 @@
 # 24-07-24
 1. Support for disabling trades that have items on both sides (anything other than metal or keys)
 2. Fixed avatars failing to send properly in the declined trade webhook
+# 29-07-24
+1. Removed bot startup checks that are no longer required
