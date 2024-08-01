@@ -31,3 +31,6 @@
 2. Fixed avatars failing to send properly in the declined trade webhook
 # 29-07-24
 1. Removed bot startup checks that are no longer required
+# 31-07-24
+1. Revised default user agent name
+2. Removed example options.json

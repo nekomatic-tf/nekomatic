@@ -946,7 +946,7 @@ export default class Bot {
                                             'Nekomatic' +
                                             (this.options.useragentHeaderCustom !== ''
                                                 ? ` - ${this.options.useragentHeaderCustom}`
-                                                : ' - Trading done nyah style~'),
+                                                : ' - Trading done Nyah~ style!'),
                                         schema: this.schema
                                     });
 
