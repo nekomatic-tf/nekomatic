@@ -34,3 +34,4 @@
 # 31-07-24
 1. Revised default user agent name
 2. Removed example options.json
+3. Added npm i --omit-dev to the Dockerfile in an effort to optimize container size

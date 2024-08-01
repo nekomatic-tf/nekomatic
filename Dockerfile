@@ -2,7 +2,7 @@ ARG VERSION=lts-alpine
 
 FROM node:$VERSION
 
-LABEL maintainer="Renoki Co. <alex@renoki.org>"
+LABEL maintainer="juniorISO69960"
 
 COPY . /app
 
@@ -10,7 +10,8 @@ RUN npm install pm2 -g && \
     cd /app && \
     npm install && \
     npm run build && \
-    rm -rf src/
+    rm -rf src/ && \
+    npm install --omit=dev
 
 WORKDIR /app
 
