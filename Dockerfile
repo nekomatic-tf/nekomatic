@@ -15,4 +15,6 @@ RUN npm install pm2 -g && \
 
 WORKDIR /app
 
+ENV DOCKER=true
+
 ENTRYPOINT ["node", "/app/dist/app.js"]
