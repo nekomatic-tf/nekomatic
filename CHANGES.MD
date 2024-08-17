@@ -37,3 +37,6 @@
 3. Added npm i --omit-dev to the Dockerfile in an effort to optimize container size
 # 03-08-24
 1. Added DOCKER=true to the Dockerfile
+# 16-08-24
+1. Rich Presence - Added support for the state "PlayingCommunity"
+    - Example: "Community - TF2Autobot-Neko"

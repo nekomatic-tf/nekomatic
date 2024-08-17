@@ -161,6 +161,8 @@ export default class MyHandler extends Handler {
                     return 'Casual';
                 case 'Boot Camp':
                     return 'BootCamp';
+                case 'Community':
+                    return 'PlayingCommunity';
                 default:
                     return 'SpecialEvent';
             }
@@ -170,7 +172,7 @@ export default class MyHandler extends Handler {
             steam_display: '#TF_RichPresence_Display',
             steam_player_group: this.opt.miscSettings.game.partyName,
             steam_player_group_size: this.opt.miscSettings.game.partySize.toString(),
-            state: 'PlayingMatchGroup',
+            state: matchGroup() === 'PlayingCommunity' ? 'PlayingCommunity' : 'PlayingMatchGroup',
             matchgrouploc: matchGroup(),
             currentmap: this.customGameName
         };

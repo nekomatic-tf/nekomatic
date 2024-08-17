@@ -1196,7 +1196,7 @@ interface CheckUses {
 interface Game {
     playOnlyTF2?: boolean;
     useRichPresence?: boolean;
-    matchGroup?: 'Special Event' | 'Mann Up' | 'Competitive' | 'Casual' | 'Boot Camp';
+    matchGroup?: 'Special Event' | 'Mann Up' | 'Competitive' | 'Casual' | 'Boot Camp' | 'Community';
     customName?: string;
     partyName?: string;
     partySize?: number;

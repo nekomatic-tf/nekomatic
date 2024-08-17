@@ -475,6 +475,9 @@ export const optionsSchema: jsonschema.Schema = {
                                 },
                                 {
                                     const: 'Boot Camp'
+                                },
+                                {
+                                    const: 'Community'
                                 }
                             ]
                         },
