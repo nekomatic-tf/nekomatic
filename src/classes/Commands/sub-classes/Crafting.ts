@@ -151,8 +151,7 @@ export default class CraftingCommands {
                 if (amountToCraft - callbackIndex === 0) {
                     this.isCrafting = false;
 
-                    this.bot.client.gamesPlayed([]);
-                    this.bot.setPresence();
+                    this.bot.refreshPresence(false);
 
                     if (crafted < amountToCraft) {
                         return this.bot.sendMessage(

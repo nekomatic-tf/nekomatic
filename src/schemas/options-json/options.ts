@@ -452,11 +452,22 @@ export const optionsSchema: jsonschema.Schema = {
                 game: {
                     type: 'object',
                     properties: {
-                        playOnlyTF2: {
-                            type: 'boolean'
-                        },
-                        useRichPresence: {
-                            type: 'boolean'
+                        displayMode: {
+                            type: 'string',
+                            anyOf: [
+                                {
+                                    const: 'custom'
+                                },
+                                {
+                                    const: 'rich'
+                                },
+                                {
+                                    const: 'tf2'
+                                },
+                                {
+                                    const: 'none'
+                                }
+                            ]
                         },
                         matchGroup: {
                             type: 'string',
@@ -492,7 +503,7 @@ export const optionsSchema: jsonschema.Schema = {
                             type: 'number'
                         }
                     },
-                    required: ['playOnlyTF2', 'customName'],
+                    required: ['displayMode', 'matchGroup', 'customName', 'partyName', 'partySize'],
                     additionalProperties: false
                 },
                 alwaysRemoveItemAttributes: {

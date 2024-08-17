@@ -275,7 +275,7 @@ export default class MyHandler extends Handler {
                 .toFixed(0)} s`
         );
 
-        this.bot.setPresence();
+        this.bot.refreshPresence(true);
         this.bot.client.setPersona(EPersonaState.Online);
 
         this.botSteamID = this.bot.client.steamID;
@@ -470,7 +470,7 @@ export default class MyHandler extends Handler {
         this.bot.client.setPersona(EPersonaState.Snooze);
         if (this.bot.isReady) {
             this.bot.client.setPersona(EPersonaState.Online);
-            this.bot.setPresence();
+            this.bot.refreshPresence(true);
         }
     }
 
@@ -2308,7 +2308,7 @@ export default class MyHandler extends Handler {
                 this.sentSummary = {};
             }, 2 * 60 * 1000);
         } else {
-            this.bot.setPresence();
+            this.bot.refreshPresence(true);
         }
     }
 
@@ -2678,7 +2678,7 @@ export default class MyHandler extends Handler {
 
     onTF2QueueCompleted(): void {
         log.debug('Queue finished');
-        this.bot.setPresence();
+        this.bot.refreshPresence(true);
     }
 
     onCreateListingsSuccessful(response: { created: number; archived: number; errors: any[] }): void {

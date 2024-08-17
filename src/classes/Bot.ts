@@ -428,23 +428,25 @@ export default class Bot {
         return recrateListingsFailed;
     }
 
-    setPresence(customGameName?: string): void {
-        // Set the status for the bot on steam (with RPC)
+    refreshPresence(silentRefresh: boolean): void {
+        // prototyping
+
         const gameOpt = this.options.miscSettings.game;
-        if (gameOpt.playOnlyTF2) {
-            // A. You chose the stupid path
+
+        if (!silentRefresh && !(gameOpt.displayMode === 'none')) {
+            // If not true, exit all previously played games (no point in refreshing if displayMode is 'none')
+            this.client.gamesPlayed([]);
+        }
+
+        if (gameOpt.displayMode === 'custom') {
+            this.client.gamesPlayed([this.handler.customGameName, 440]);
+        } else if (gameOpt.displayMode === 'rich') {
             this.client.gamesPlayed(440);
-            if (gameOpt.useRichPresence) {
-                // A2. You are crazy and i love you
-                const rpcObj = this.handler.richPresence;
-                if (customGameName) rpcObj.currentmap = customGameName;
-                this.client.uploadRichPresence(440, rpcObj);
-            } else this.client.uploadRichPresence(440, {}); // Send out a blank RPC
-        } else {
-            // B. You're actually a sane person :)
-            this.client.gamesPlayed(
-                gameOpt.playOnlyTF2 ? 440 : [customGameName ? customGameName : this.handler.customGameName, 440]
-            );
+            this.client.uploadRichPresence(440, this.handler.richPresence);
+        } else if (gameOpt.displayMode === 'tf2') {
+            this.client.gamesPlayed(440);
+        } else if (gameOpt.displayMode === 'none') {
+            this.client.gamesPlayed([]);
         }
     }
 

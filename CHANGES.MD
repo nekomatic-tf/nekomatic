@@ -40,3 +40,13 @@
 # 16-08-24
 1. Rich Presence - Added support for the state "PlayingCommunity"
     - Example: "Community - TF2Autobot-Neko"
+# 17-08-24
+1. Rich Presence V2
+    - Removed useRichPresence and playOnlyTF2
+    - Added a new option "displayMode" to replace obsolete options
+        1. custom - play a custom non-steam game
+        2. rich - play tf2 with rich presence
+        3. tf2 - play tf2 without rich presence
+        4. none - play nothing
+# 20-08-24
+1. Updated Options to migrate useRichPresence and playOnlyTF2 to displayMode

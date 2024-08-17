@@ -44,8 +44,7 @@ export const DEFAULTS: JsonOptions = {
             noiseMaker: true
         },
         game: {
-            playOnlyTF2: false,
-            useRichPresence: false,
+            displayMode: 'custom',
             matchGroup: 'Special Event',
             customName: 'Nekomatic',
             partyName: 'nekomatic',
@@ -1194,8 +1193,7 @@ interface CheckUses {
 // ------------ Game ------------
 
 interface Game {
-    playOnlyTF2?: boolean;
-    useRichPresence?: boolean;
+    displayMode?: 'custom' | 'rich' | 'tf2' | 'none';
     matchGroup?: 'Special Event' | 'Mann Up' | 'Competitive' | 'Casual' | 'Boot Camp' | 'Community';
     customName?: string;
     partyName?: string;
@@ -2484,6 +2482,25 @@ function replaceOldProperties(options: DeprecatedJsonOptions): boolean {
     // <=v5.7.0 to latest
     if (options.miscSettings.reputationCheck?.['reptfAsPrimarySource'] !== undefined) {
         delete options.miscSettings.reputationCheck?.['reptfAsPrimarySource'];
+        isChanged = true;
+    }
+
+    // useRichPresence & playOnlyTF2 -> displayMode
+    if (
+        options.miscSettings.game?.['useRichPresence'] !== undefined ||
+        options.miscSettings.game?.['playOnlyTF2'] !== undefined
+    ) {
+        if (options.miscSettings.game?.['useRichPresence'] && options.miscSettings.game?.['playOnlyTF2']) {
+            options.miscSettings.game.displayMode = 'rich';
+        } else if (options.miscSettings.game?.['playOnlyTF2']) {
+            options.miscSettings.game.displayMode = 'tf2';
+        } else {
+            options.miscSettings.game.displayMode = 'custom';
+        }
+
+        delete options.miscSettings.game?.['useRichPresence'];
+        delete options.miscSettings.game?.['playOnlyTF2'];
+
         isChanged = true;
     }
 

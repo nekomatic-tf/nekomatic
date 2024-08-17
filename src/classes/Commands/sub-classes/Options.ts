@@ -911,8 +911,7 @@ export default class OptionsCommands {
                 // --- Game Status Real Time Updater ---
                 if (knownParams.miscSettings?.game) {
                     // If these do not match, update
-                    this.bot.client.gamesPlayed([]);
-                    this.bot.setPresence();
+                    this.bot.refreshPresence(false);
                 }
 
                 if (knownParams.statistics?.sendStats?.enable === true) {
