@@ -429,8 +429,6 @@ export default class Bot {
     }
 
     refreshPresence(silentRefresh: boolean): void {
-        // prototyping
-
         const gameOpt = this.options.miscSettings.game;
 
         if (!silentRefresh && !(gameOpt.displayMode === 'none')) {
