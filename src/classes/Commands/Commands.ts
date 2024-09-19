@@ -151,7 +151,9 @@ export default class Commands {
                     return this.bot.sendMessage(steamID, '❌ Command not available.');
                 }
                 this.queueCommand(steamID);
-            } else if (['time', 'uptime', 'pure', 'rate', 'owner', 'discord', 'stock'].includes(command)) {
+            } else if (
+                ['time', 'uptime', 'systemuptime', 'pure', 'rate', 'owner', 'discord', 'stock'].includes(command)
+            ) {
                 if (command === 'stock') {
                     return this.misc.miscCommand(steamID, command as Misc, message);
                 }

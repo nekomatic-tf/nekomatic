@@ -2,7 +2,7 @@ import SteamID from 'steamid';
 import SKU from '@tf2autobot/tf2-sku';
 import pluralize from 'pluralize';
 import * as timersPromises from 'timers/promises';
-import { Message as DiscordMessage } from 'discord.js';
+import { Message as DiscordMessage, EmbedBuilder } from 'discord.js';
 import { removeLinkProtocol } from '../functions/utils';
 import CommandParser from '../../CommandParser';
 import Bot from '../../Bot';
@@ -10,7 +10,7 @@ import { Discord, Stock } from '../../Options';
 import { pure, timeNow, uptime, testPriceKey, systemUptime } from '../../../lib/tools/export';
 import getAttachmentName from '../../../lib/tools/getAttachmentName';
 
-type Misc = 'time' | 'uptime' | 'pure' | 'rate' | 'owner' | 'discord' | 'stock';
+type Misc = 'time' | 'uptime' | 'systemuptime' | 'pure' | 'rate' | 'owner' | 'discord' | 'stock';
 type CraftUncraft = 'craftweapon' | 'uncraftweapon';
 
 export default class MiscCommands {
@@ -55,12 +55,25 @@ export default class MiscCommands {
             );
         } else if (command === 'uptime') {
             const botUptime = uptime();
+            this.bot.sendMessage(
+                steamID,
+                custom ? custom.replace(/%uptime%/g, botUptime) : botUptime,
+                new EmbedBuilder({
+                    color: 0xfa289f,
+                    title: 'Uptime',
+                    description: custom ? custom.replace(/%uptime%/g, botUptime) : botUptime
+                })
+            );
+        } else if (command === 'systemuptime') {
             const sysUptime = systemUptime();
             this.bot.sendMessage(
                 steamID,
-                custom
-                    ? `${custom.replace(/%uptime%/g, botUptime)}\n${custom.replace(/%uptime%/g, sysUptime)}`
-                    : `${botUptime}\n${sysUptime}`
+                custom ? custom.replace(/%uptime%/g, sysUptime) : sysUptime,
+                new EmbedBuilder({
+                    color: 0xfa289f,
+                    title: 'System Uptime',
+                    description: custom ? custom.replace(/%uptime%/g, sysUptime) : sysUptime
+                })
             );
         } else if (command === 'pure') {
             const pureStock = pure.stock(this.bot);

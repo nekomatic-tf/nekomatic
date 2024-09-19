@@ -2215,6 +2215,9 @@ export const optionsSchema: jsonschema.Schema = {
                 uptime: {
                     $ref: '#/definitions/only-enabled-disabled-reply'
                 },
+                systemuptime: {
+                    $ref: '#/definitions/only-enabled-disabled-reply'
+                },
                 pure: {
                     $ref: '#/definitions/only-enabled-disabled-reply'
                 },

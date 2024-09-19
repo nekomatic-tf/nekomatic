@@ -803,6 +803,13 @@ export const DEFAULTS: JsonOptions = {
                 reply: ''
             }
         },
+        systemuptime: {
+            enable: true,
+            customReply: {
+                disabled: '',
+                reply: ''
+            }
+        },
         pure: {
             enable: true,
             customReply: {
@@ -1816,6 +1823,7 @@ interface Commands extends OnlyEnable {
     message?: Message;
     time?: Time;
     uptime?: Uptime;
+    systemuptime?: SystemUptime;
     pure?: Pure;
     rate?: Rate;
     stock?: Stock;
@@ -1933,6 +1941,10 @@ interface Time extends OnlyEnable {
 }
 
 interface Uptime extends OnlyEnable {
+    customReply?: OnlyCustomReplyWithDisabled;
+}
+
+interface SystemUptime extends OnlyEnable {
     customReply?: OnlyCustomReplyWithDisabled;
 }
 

@@ -201,6 +201,7 @@ export default class HelpCommands {
                         `${prefix}autokeys - Get info on the bot's current autokeys settings 🔑`,
                         `time - Show the owner's current time 🕥`,
                         `uptime - Show the bot uptime 🔌`,
+                        `systemuptime - Show host system uptime 🔌`,
                         `pure - Get the bot's current pure stock 💰`,
                         `rate - Get the bot's current key rates 🔑`,
                         `stock [sku|item name] - Get a list of items that the bot owns`,

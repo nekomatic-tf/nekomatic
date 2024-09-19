@@ -50,3 +50,6 @@
         4. none - play nothing
 # 20-08-24
 1. Updated Options to migrate useRichPresence and playOnlyTF2 to displayMode
+# 19-09-24
+1. Split system uptime into a new command
+2. uptime and systemuptime now support embeds on discord
