@@ -145,7 +145,7 @@ export default class HelpCommands {
                         `wipestats - Wipe statistics for accepted trades 🔥`,
                         `statsdw - Send statistics to Discord Webhook 📊`,
                         `inventory - Get the bot's current inventory spaces     `,
-                        `version - Get the TF2Autobot version that the bot is running`
+                        `version - Get the version of Nekomatic that the bot is running`
                     ].join(`\n- ${prefix}`)
             );
 
