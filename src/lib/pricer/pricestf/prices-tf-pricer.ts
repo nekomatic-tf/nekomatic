@@ -35,7 +35,7 @@ export default class PricesTfPricer implements IPricer {
                 undefined,
                 undefined,
                 undefined,
-                'https://autobot.tf'
+                this.api.getOptions().autobotTfUrl
             );
 
             return response;
@@ -50,7 +50,7 @@ export default class PricesTfPricer implements IPricer {
                 undefined,
                 undefined,
                 undefined,
-                'https://autobot.tf'
+                this.api.getOptions().autobotTfUrl
             );
 
             return pricelist;

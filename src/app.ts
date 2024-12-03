@@ -47,7 +47,7 @@ import { apiRequest } from './lib/apiRequest';
 
 /*eslint-disable */
 SchemaManager.prototype.getSchema = function (callback): void {
-    apiRequest({ method: 'GET', url: `${options.schemaServerUrl}/schema` })
+    apiRequest({ method: 'GET', url: `${options.autobotTfSchemaUrl}/schema` })
         .then(schema => {
             this.setSchema(schema, true);
             callback(null, this.schema);
@@ -60,7 +60,8 @@ import BotManager from './classes/BotManager';
 const botManager = new BotManager(
     getPricer({
         pricerUrl: options.customPricerUrl,
-        pricerApiToken: options.customPricerApiToken
+        pricerApiToken: options.customPricerApiToken,
+        autobotTfUrl: options.autobotTfUrl
     })
 );
 

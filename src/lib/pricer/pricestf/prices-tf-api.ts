@@ -46,6 +46,8 @@ export default class PricesTfApi {
 
     public token = '';
 
+    constructor(public autobotTfUrl?: string) {}
+
     private async authedApiRequest<B>(
         httpMethod: string,
         path: string,
@@ -145,7 +147,8 @@ export default class PricesTfApi {
 
     getOptions(): PricerOptions {
         return {
-            pricerUrl: 'https://api2.prices.tf'
+            pricerUrl: 'https://api2.prices.tf',
+            autobotTfUrl: this.autobotTfUrl ? this.autobotTfUrl : 'https://autobot.tf'
         };
     }
 }

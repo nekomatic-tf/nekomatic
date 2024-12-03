@@ -2218,7 +2218,8 @@ export default interface Options extends JsonOptions {
     customPricerApiToken?: string;
     customPricerUrl?: string;
 
-    schemaServerUrl?: string;
+    autobotTfUrl?: string;
+    autobotTfSchemaUrl?: string;
 
     skipBPTFTradeofferURL?: boolean;
     skipUpdateProfileSettings?: boolean;
@@ -2556,7 +2557,8 @@ export function loadOptions(options?: Options): Options {
         customPricerApiToken: getOption('customPricerApiToken', '', String, incomingOptions),
         customPricerUrl: getOption('customPricerUrl', '', String, incomingOptions),
 
-        schemaServerUrl: getOption('schemaServerUrl', 'https://schema.autobot.tf', String, incomingOptions),
+        autobotTfUrl: getOption('autobotTfUrl', 'https://autobot.tf', String, incomingOptions),
+        autobotTfSchemaUrl: getOption('autobotTfSchemaUrl', 'https://schema.autobot.tf', String, incomingOptions),
 
         skipBPTFTradeofferURL: getOption('skipBPTFTradeofferURL', true, jsonParseBoolean, incomingOptions),
         skipUpdateProfileSettings: getOption('skipUpdateProfileSettings', true, jsonParseBoolean, incomingOptions),

@@ -9,7 +9,7 @@ export function getPricer(options: PricerOptions): IPricer {
         const api = new CustomPricerApi(options.pricerUrl, options.pricerApiToken);
         return new CustomPricer(api);
     } else {
-        const api = new PricesTfApi();
+        const api = new PricesTfApi(options.autobotTfUrl);
         return new PricesTfPricer(api);
     }
 }

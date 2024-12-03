@@ -3,6 +3,7 @@ import Currencies from '@tf2autobot/tf2-currencies';
 export interface PricerOptions {
     pricerUrl?: string;
     pricerApiToken?: string;
+    autobotTfUrl?: string;
 }
 
 /**

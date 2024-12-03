@@ -209,7 +209,7 @@ function getSummary(
                                 ? pureEmoji.get(sku)
                                 : name
                             : name
-                    }](https://autobot.tf/items/${sku})${amount > 1 ? ` x${amount}` : ''} (${
+                    }](${bot.options.autobotTfUrl}/items/${sku})${amount > 1 ? ` x${amount}` : ''} (${
                         (summaryAccepted || summaryInProcess) && oldStock !== null ? `${oldStock} → ` : ''
                     }${
                         which === 'our'
@@ -247,7 +247,7 @@ function getSummary(
                                 ? pureEmoji.get(sku)
                                 : name
                             : name
-                    }](https://autobot.tf/items/${sku})${amount > 1 ? ` x${amount}` : ''}`
+                    }](${bot.options.autobotTfUrl}/items/${sku})${amount > 1 ? ` x${amount}` : ''}`
                 );
             } else {
                 summary.push(name + (amount > 1 ? ` x${amount}` : ''));

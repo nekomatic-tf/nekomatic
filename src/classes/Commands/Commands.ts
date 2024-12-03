@@ -326,11 +326,11 @@ export default class Commands {
                     );
                 }
 
-                this.bot.sendMessage(steamID, `• ${sku}\nhttps://autobot.tf/items/${sku}`);
+                this.bot.sendMessage(steamID, `• ${sku}\n${this.bot.options.autobotTfUrl}/items/${sku}`);
             } else {
                 // Receive sku
                 const name = this.bot.schema.getName(SKU.fromString(itemNamesOrSkus), false);
-                this.bot.sendMessage(steamID, `• ${name}\nhttps://autobot.tf/items/${itemNamesOrSkus}`);
+                this.bot.sendMessage(steamID, `• ${name}\n${this.bot.options.autobotTfUrl}/items/${itemNamesOrSkus}`);
             }
         } else {
             const results: { source: string; generated: string }[] = [];
